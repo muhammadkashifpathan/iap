@@ -125,11 +125,13 @@ function renderTracks(playlist) {
   
   playlist.tracks.forEach(track => {
     const trackItem = document.createElement('div');
-    trackItem.className = 'track-item glassmorphism';
-    trackItem.dataset.id = track.id;
     
     // Is this track the currently playing track?
     const isActiveTrack = currentTrack && currentTrack.id === track.id && currentPlaylistId === playlist.id;
+    
+    // Add active class if this is the current track
+    trackItem.className = isActiveTrack ? 'track-item glassmorphism active' : 'track-item glassmorphism';
+    trackItem.dataset.id = track.id;
     
     // Create waveform animation for currently playing track
     let playIconHtml = '<i class="fa-solid fa-play"></i>';

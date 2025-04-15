@@ -305,6 +305,7 @@ body.dark-theme .glow-accent {
   gap: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .track-item:hover {
@@ -313,6 +314,18 @@ body.dark-theme .glow-accent {
 
 body.dark-theme .track-item:hover {
   box-shadow: 0 0 20px rgba(124, 77, 255, 0.7);
+}
+
+/* Active track styling */
+.track-item.active {
+  background: linear-gradient(90deg, rgba(124, 77, 255, 0.2), rgba(255, 0, 255, 0.05));
+  box-shadow: 0 0 15px rgba(124, 77, 255, 0.3);
+  border-left: 3px solid var(--primary-color);
+}
+
+body.dark-theme .track-item.active {
+  background: linear-gradient(90deg, rgba(124, 77, 255, 0.3), rgba(0, 0, 0, 0));
+  box-shadow: 0 0 20px rgba(124, 77, 255, 0.4);
 }
 
 .track-image {
@@ -337,12 +350,13 @@ body.dark-theme .track-item:hover {
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0.375rem;
-  opacity: 0;
+  opacity: 1; /* Always visible */
   transition: opacity 0.3s ease;
 }
 
-.track-item:hover .track-image-overlay {
-  opacity: 1;
+/* Add a special style for active track */
+.track-item.active .track-image-overlay {
+  background-color: rgba(124, 77, 255, 0.4);
 }
 
 .track-image-overlay i {
