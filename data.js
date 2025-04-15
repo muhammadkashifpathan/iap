@@ -1,114 +1,106 @@
-// Music player data structure
+// Music player data structure with local audio files
 const playlists = [
   {
     id: 1,
-    title: "Trending Now",
-    description: "Updated weekly",
-    coverImage: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bXVzaWMlMjB0cmVuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    title: "Female Vocals",
+    description: "Soothing female vocals",
+    coverImage: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmVtYWxlJTIwc2luZ2VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
     tracks: [
       {
         id: 1,
-        title: "Endless Summer",
-        artist: "HeatWave",
-        coverImage: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3", 
-        duration: 225, // 3:45
+        title: "Hasi - Female Cover",
+        artist: "Slowed & Reverb",
+        coverImage: "https://images.unsplash.com/photo-1516981442399-a91139ffff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZlbWFsZSUyMHNpbmdlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/fem/Hasi - ( Female Cover) - Slowed + Reverb - Lyrics - Use Headphones.mp3", 
+        duration: 240, // Approximate duration
       },
       {
         id: 2,
-        title: "Neon Dreams",
-        artist: "Synthwave",
-        coverImage: "https://images.unsplash.com/photo-1504898770365-14faca6a7320?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG11c2ljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-dreaming-big-31.mp3",
-        duration: 262, // 4:22
-      },
-      {
-        id: 3,
-        title: "Midnight Groove",
-        artist: "The Vibes",
-        coverImage: "https://images.unsplash.com/photo-1619983081563-430f63602796?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYXJ0aXN0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-hip-hop-02-621.mp3",
-        duration: 198, // 3:18
-      },
-      {
-        id: 4,
-        title: "Electric Dreams",
-        artist: "Voltage",
-        coverImage: "https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG11c2ljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-trip-hop-vibes-149.mp3",
-        duration: 302, // 5:02
+        title: "Parindey",
+        artist: "B Praak",
+        coverImage: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGZlbWFsZSUyMHNpbmdlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/fem/Parindey (Slowed+Reverb) Full HD Video Song｜B Praak｜Chill Vibes Lofi.mp3",
+        duration: 280, // Approximate duration
       }
     ]
   },
   {
     id: 2,
-    title: "Chill Vibes",
-    description: "Perfect for relaxing",
-    coverImage: "https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVsYXhlZCUyMG11c2ljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+    title: "Motivational",
+    description: "Inspire your day",
+    coverImage: "https://images.unsplash.com/photo-1533228876829-65c94e7b5025?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1vdGl2YXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
     tracks: [
       {
+        id: 3,
+        title: "Karne Se Hoga",
+        artist: "Anamta Khan & Amaan Noor",
+        coverImage: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW90aXZhdGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/mot/Karne Se Hoga- Anamta Khan _ Amaan Noor _ Lyrical Video _ Motivational Song 2023 _ Original Song.mp3",
+        duration: 255, // Approximate duration
+      },
+      {
+        id: 4,
+        title: "Parindey",
+        artist: "Mohammed Irfan",
+        coverImage: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW90aXZhdGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/mot/Parindey – Mohammed Irfan ｜ The Successful Loosers ｜ Aaditya Kumar ｜ Abhishek R Sharma.mp3",
+        duration: 340, // Approximate duration
+      },
+      {
         id: 5,
-        title: "Floating",
-        artist: "Dreamscape",
-        coverImage: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-deep-urban-623.mp3",
-        duration: 210, // 3:30
-      },
-      {
-        id: 6,
-        title: "Sunset Memories",
-        artist: "Chill Mode",
-        coverImage: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHN1bnNldCUyMG11c2ljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3",
-        duration: 180, // 3:00
-      },
-      {
-        id: 7,
-        title: "Ocean Waves",
-        artist: "Aqua Sounds",
-        coverImage: "https://images.unsplash.com/photo-1549417229-aa67d3263c09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b2NlYW4lMjB3YXZlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-lost-in-his-thoughts-144.mp3",
-        duration: 240, // 4:00
+        title: "Parindey (Slowed+Reverb)",
+        artist: "B Praak",
+        coverImage: "https://images.unsplash.com/photo-1448387473223-5c37445527e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1vdGl2YXRpb258ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/mot/Parindey (Slowed+Reverb) Full HD Video Song｜B Praak｜Chill Vibes Lofi.mp3",
+        duration: 280, // Approximate duration
       }
     ]
   },
   {
     id: 3,
-    title: "Party Mix",
-    description: "Get the party started",
-    coverImage: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29uY2VydCUyMHBhcnR5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+    title: "Punjabi Hits",
+    description: "Top Punjabi tracks",
+    coverImage: "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHVuamFiaSUyMG11c2ljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+    tracks: [
+      {
+        id: 6,
+        title: "Karne Se Hoga",
+        artist: "Anamta Khan & Amaan Noor",
+        coverImage: "https://images.unsplash.com/photo-1564106273110-e1086cc43374?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHVuamFiaSUyMG11c2ljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/punj/Karne Se Hoga- Anamta Khan _ Amaan Noor _ Lyrical Video _ Motivational Song 2023 _ Original Song.mp3",
+        duration: 255, // Approximate duration
+      },
+      {
+        id: 7,
+        title: "Je Tera Khayal Na Aave",
+        artist: "Punjabi Lyrics",
+        coverImage: "https://images.unsplash.com/photo-1617360547704-3da8b5216738?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHB1bmphYmklMjBtdXNpY3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/punj/VERY GRATEFUL Punjabi Song Je Tera Khayal Na Aave Taa A Duniya V Sunji Aa With Lyrics.mp3",
+        duration: 230, // Approximate duration
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "Parindey Collection",
+    description: "All Parindey versions",
+    coverImage: "https://images.unsplash.com/photo-1528150177508-fd2dc2a2386b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmlyZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
     tracks: [
       {
         id: 8,
-        title: "Bass Drop",
-        artist: "DJ Electro",
-        coverImage: "https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZGolMjBtdXNpY3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-house-your-life-127.mp3",
-        duration: 195, // 3:15
+        title: "Parindey",
+        artist: "Mohammed Irfan",
+        coverImage: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGJpcmR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/par/Parindey – Mohammed Irfan ｜ The Successful Loosers ｜ Aaditya Kumar ｜ Abhishek R Sharma.mp3",
+        duration: 340, // Approximate duration
       },
       {
         id: 9,
-        title: "Party Animals",
-        artist: "Night Owls",
-        coverImage: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGFydHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-dance-with-me-3.mp3",
-        duration: 215, // 3:35
-      },
-      {
-        id: 10,
-        title: "Dancefloor Hits",
-        artist: "BPM Kings",
-        coverImage: "https://images.unsplash.com/photo-1574393118433-e932f3cb5154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGRhbmNlJTIwZmxvb3J8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-c-major-forest-131.mp3",
-        duration: 185, // 3:05
-      },
-      {
-        id: 11,
-        title: "Euphoria",
-        artist: "Rhythm Nation",
-        coverImage: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGl2ZSUyMG11c2ljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-        audioSrc: "https://assets.mixkit.co/music/preview/mixkit-raising-me-higher-34.mp3",
-        duration: 230, // 3:50
+        title: "Parindey (Slowed+Reverb)",
+        artist: "B Praak",
+        coverImage: "https://images.unsplash.com/photo-1583771756989-4813ccaa42e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmlyZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        audioSrc: "audios/par/Parindey (Slowed+Reverb) Full HD Video Song｜B Praak｜Chill Vibes Lofi.mp3",
+        duration: 280, // Approximate duration
       }
     ]
   }
