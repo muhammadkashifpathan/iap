@@ -17,18 +17,37 @@
         <h1>Melodify</h1>
       </div>
       
-      <button id="themeToggle" class="theme-toggle">
-        <i class="fa-solid fa-sun"></i>
-      </button>
+      <div class="header-controls">
+        <!-- Search Bar -->
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search tracks...">
+          <button id="searchButton">
+            <i class="fa-solid fa-search"></i>
+          </button>
+        </div>
+        
+        <button id="themeToggle" class="theme-toggle">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+      </div>
     </header>
 
     <main>
       <!-- Playlists Section -->
       <section id="playlistsSection" class="active">
-        <h2 class="section-title">
-          <i class="fa-solid fa-list-music"></i>
-          Playlists
-        </h2>
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fa-solid fa-list-music"></i>
+            Playlists
+          </h2>
+          
+          <!-- Playlist Management Buttons -->
+          <div class="playlist-controls">
+            <button id="createPlaylistButton" class="control-button glassmorphism">
+              <i class="fa-solid fa-plus"></i> New Playlist
+            </button>
+          </div>
+        </div>
         
         <div class="playlists-grid">
           <!-- Playlist cards will be added here by JavaScript -->
@@ -42,16 +61,72 @@
             <i class="fa-solid fa-music"></i>
             <span id="playlistTitle"></span>
           </h2>
-          <button id="backToPlaylists" class="back-button glassmorphism">
-            <i class="fa-solid fa-arrow-left"></i> Back to Playlists
-          </button>
+          <div class="tracks-controls">
+            <button id="backToPlaylists" class="back-button glassmorphism">
+              <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+            <button id="shuffleButton" class="control-button glassmorphism">
+              <i class="fa-solid fa-shuffle"></i>
+            </button>
+          </div>
         </div>
         
         <div id="tracksList" class="tracks-list">
           <!-- Track items will be added here by JavaScript -->
         </div>
       </section>
+      
+      <!-- Lyrics Section -->
+      <section id="lyricsSection">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fa-solid fa-microphone"></i>
+            Lyrics
+          </h2>
+          <button id="backFromLyrics" class="back-button glassmorphism">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </button>
+        </div>
+        
+        <div id="lyricsContainer" class="lyrics-container">
+          <!-- Lyrics will be added here by JavaScript -->
+        </div>
+      </section>
+      
+      <!-- Create Playlist Modal -->
+      <div id="createPlaylistModal" class="modal">
+        <div class="modal-content glassmorphism">
+          <div class="modal-header">
+            <h3>Create New Playlist</h3>
+            <button id="closeModal" class="close-button">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="playlistTitle">Title</label>
+              <input type="text" id="playlistTitleInput" placeholder="Enter playlist title">
+            </div>
+            <div class="form-group">
+              <label for="playlistDescription">Description</label>
+              <input type="text" id="playlistDescriptionInput" placeholder="Enter playlist description">
+            </div>
+            <div class="form-group">
+              <label for="playlistCover">Cover Image URL</label>
+              <input type="text" id="playlistCoverInput" placeholder="Enter image URL or leave blank for default">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="savePlaylistButton" class="primary-button">Create Playlist</button>
+          </div>
+        </div>
+      </div>
     </main>
+
+    <!-- Audio Visualizer -->
+    <div id="visualizerContainer" class="visualizer-container">
+      <canvas id="visualizer"></canvas>
+    </div>
 
     <!-- Music Player -->
     <div id="musicPlayer" class="music-player glassmorphism">
@@ -65,12 +140,28 @@
           <div class="track-details">
             <h3 id="currentTrackTitle">Select a track</h3>
             <p id="currentTrackArtist"></p>
+            
+            <!-- Extended Controls -->
+            <div class="extended-track-controls">
+              <button id="lyricsButton" class="small-button" title="View Lyrics">
+                <i class="fa-solid fa-microphone"></i>
+              </button>
+              <button id="downloadButton" class="small-button" title="Download Track">
+                <i class="fa-solid fa-download"></i>
+              </button>
+              <button id="shareButton" class="small-button" title="Share Track">
+                <i class="fa-solid fa-share-alt"></i>
+              </button>
+            </div>
           </div>
         </div>
         
         <!-- Player Controls -->
         <div class="player-controls">
           <div class="main-controls">
+            <button id="repeatButton" title="Repeat Mode" class="control-button">
+              <i class="fa-solid fa-repeat"></i>
+            </button>
             <button id="previousButton">
               <i class="fa-solid fa-backward-step"></i>
             </button>
@@ -80,6 +171,16 @@
             <button id="nextButton">
               <i class="fa-solid fa-forward-step"></i>
             </button>
+            <div class="playback-speed-container">
+              <select id="playbackSpeed" title="Playback Speed">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+              </select>
+            </div>
           </div>
           
           <!-- Progress Bar -->
@@ -101,6 +202,104 @@
           </button>
           <input type="range" id="volumeSlider" min="0" max="100" value="80">
         </div>
+      </div>
+    </div>
+    
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal">
+      <div class="modal-content glassmorphism">
+        <div class="modal-header">
+          <h3>Share Track</h3>
+          <button id="closeShareModal" class="close-button">
+            <i class="fa-solid fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Share this track with friends!</p>
+          <div class="share-options">
+            <button class="share-button" data-platform="facebook">
+              <i class="fa-brands fa-facebook"></i> Facebook
+            </button>
+            <button class="share-button" data-platform="twitter">
+              <i class="fa-brands fa-twitter"></i> Twitter
+            </button>
+            <button class="share-button" data-platform="whatsapp">
+              <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </button>
+            <button class="share-button" data-platform="email">
+              <i class="fa-solid fa-envelope"></i> Email
+            </button>
+          </div>
+          <div class="form-group">
+            <label for="shareLink">Or copy the link</label>
+            <div class="copy-link-container">
+              <input type="text" id="shareLinkInput" readonly>
+              <button id="copyLinkButton">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Info (hidden by default) -->
+  <div id="keyboardShortcutsInfo" class="keyboard-shortcuts-info glassmorphism">
+    <div class="shortcuts-header">
+      <h3>Keyboard Shortcuts</h3>
+      <button id="closeShortcutsInfo">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+    <div class="shortcuts-list">
+      <div class="shortcut-item">
+        <span class="key">Space</span>
+        <span class="description">Play/Pause</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">←</span>
+        <span class="description">Previous Track</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">→</span>
+        <span class="description">Next Track</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">↑</span>
+        <span class="description">Volume Up</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">↓</span>
+        <span class="description">Volume Down</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">M</span>
+        <span class="description">Mute/Unmute</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">L</span>
+        <span class="description">Show/Hide Lyrics</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">R</span>
+        <span class="description">Toggle Repeat</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">S</span>
+        <span class="description">Toggle Shuffle</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">+</span>
+        <span class="description">Increase Speed</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">-</span>
+        <span class="description">Decrease Speed</span>
+      </div>
+      <div class="shortcut-item">
+        <span class="key">?</span>
+        <span class="description">Show/Hide Shortcuts</span>
       </div>
     </div>
   </div>
