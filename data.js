@@ -108,3 +108,108 @@ const playlists = [
 
 // Default fallback image for tracks that don't have one
 const defaultTrackImage = "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60";
+
+// User's custom playlists (will be loaded from localStorage)
+let userPlaylists = [];
+
+// Generate a unique ID for new tracks/playlists
+function generateUniqueId(collection) {
+  if (!collection || collection.length === 0) return 1;
+  const maxId = Math.max(...collection.map(item => item.id));
+  return maxId + 1;
+}
+
+// Load user playlists from localStorage
+function loadUserPlaylists() {
+  const saved = localStorage.getItem('userPlaylists');
+  if (saved) {
+    try {
+      userPlaylists = JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to parse saved playlists:', e);
+      userPlaylists = [];
+    }
+  }
+}
+
+// Save user playlists to localStorage
+function saveUserPlaylists() {
+  localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
+}
+
+// Create a new user playlist
+function createPlaylist(title, description, coverImage) {
+  const newPlaylist = {
+    id: generateUniqueId([...playlists, ...userPlaylists]),
+    title: title || 'Untitled Playlist',
+    description: description || 'My custom playlist',
+    coverImage: coverImage || defaultTrackImage,
+    isCustom: true,
+    tracks: []
+  };
+  
+  userPlaylists.push(newPlaylist);
+  saveUserPlaylists();
+  return newPlaylist;
+}
+
+// Add a track to a user playlist
+function addTrackToPlaylist(playlistId, track) {
+  const playlist = userPlaylists.find(p => p.id === playlistId);
+  if (!playlist) return false;
+  
+  // Check if track already exists in the playlist
+  if (playlist.tracks.some(t => t.id === track.id)) return false;
+  
+  playlist.tracks.push(track);
+  saveUserPlaylists();
+  return true;
+}
+
+// Remove a track from a user playlist
+function removeTrackFromPlaylist(playlistId, trackId) {
+  const playlist = userPlaylists.find(p => p.id === playlistId);
+  if (!playlist) return false;
+  
+  const trackIndex = playlist.tracks.findIndex(t => t.id === trackId);
+  if (trackIndex === -1) return false;
+  
+  playlist.tracks.splice(trackIndex, 1);
+  saveUserPlaylists();
+  return true;
+}
+
+// Delete a user playlist
+function deletePlaylist(playlistId) {
+  const index = userPlaylists.findIndex(p => p.id === playlistId);
+  if (index === -1) return false;
+  
+  userPlaylists.splice(index, 1);
+  saveUserPlaylists();
+  return true;
+}
+
+// Get all playlists (default + user)
+function getAllPlaylists() {
+  return [...playlists, ...userPlaylists];
+}
+
+// Get all tracks from all playlists
+function getAllTracks() {
+  const allTracks = [];
+  const processedIds = new Set();
+  
+  [...playlists, ...userPlaylists].forEach(playlist => {
+    playlist.tracks.forEach(track => {
+      if (!processedIds.has(track.id)) {
+        allTracks.push({...track, playlistId: playlist.id});
+        processedIds.add(track.id);
+      }
+    });
+  });
+  
+  return allTracks;
+}
+
+// Initialize user playlists
+loadUserPlaylists();
