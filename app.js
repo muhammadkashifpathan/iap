@@ -121,15 +121,8 @@ function renderPlaylists() {
     if (playlist.id === 3) glowClass = 'glow-accent';
     if (playlist.isCustom) glowClass = 'glow-accent';
     
-    // Add a delete button for custom playlists
+    // We're hiding all playlist management features
     let deleteButtonHtml = '';
-    if (playlist.isCustom) {
-      deleteButtonHtml = `
-        <button class="delete-playlist-button" data-playlist-id="${playlist.id}">
-          <i class="fa-solid fa-trash"></i>
-        </button>
-      `;
-    }
     
     playlistCard.innerHTML = `
       <div class="playlist-card-image">
@@ -328,42 +321,20 @@ function setupEventListeners() {
   // Search functionality
   searchInput.addEventListener('input', (e) => {
     searchQuery = e.target.value.toLowerCase().trim();
-    if (searchQuery && currentPlaylistId) {
-      const currentPlaylist = getAllPlaylists().find(p => p.id === currentPlaylistId);
-      if (currentPlaylist) {
-        const filteredTracks = currentPlaylist.tracks.filter(track => 
-          track.title.toLowerCase().includes(searchQuery) || 
-          track.artist.toLowerCase().includes(searchQuery)
-        );
-        
-        // Create a temporary playlist with filtered tracks
-        const tempPlaylist = { ...currentPlaylist, tracks: filteredTracks };
-        renderTracks(tempPlaylist);
-      }
-    } else if (currentPlaylistId) {
-      // If search is cleared, show all tracks
-      const currentPlaylist = getAllPlaylists().find(p => p.id === currentPlaylistId);
-      if (currentPlaylist) {
-        renderTracks(currentPlaylist);
-      }
-    }
-  });
-  
-  searchButton.addEventListener('click', () => {
-    const query = searchQuery.trim();
-    if (query) {
+    
+    if (searchQuery) {
       // Search across all playlists
       const allTracks = getAllTracks();
       const filteredTracks = allTracks.filter(track => 
-        track.title.toLowerCase().includes(query) || 
-        track.artist.toLowerCase().includes(query)
+        track.title.toLowerCase().includes(searchQuery) || 
+        track.artist.toLowerCase().includes(searchQuery)
       );
       
       if (filteredTracks.length > 0) {
         // Create a temporary "Search Results" playlist
         const searchPlaylist = {
           id: 'search',
-          title: `Search: "${query}"`,
+          title: `Search: "${searchQuery}"`,
           description: `${filteredTracks.length} results found`,
           tracks: filteredTracks
         };
@@ -373,8 +344,39 @@ function setupEventListeners() {
         playlistTitle.textContent = searchPlaylist.title;
         renderTracks(searchPlaylist);
         showSection('tracks');
+      } else if (currentPlaylistId && currentPlaylistId !== 'search') {
+        // If no global results but we're in a playlist, filter the current playlist
+        const currentPlaylist = getAllPlaylists().find(p => p.id === currentPlaylistId);
+        if (currentPlaylist) {
+          const filteredTracks = currentPlaylist.tracks.filter(track => 
+            track.title.toLowerCase().includes(searchQuery) || 
+            track.artist.toLowerCase().includes(searchQuery)
+          );
+          
+          // Create a temporary playlist with filtered tracks
+          const tempPlaylist = { ...currentPlaylist, tracks: filteredTracks };
+          renderTracks(tempPlaylist);
+        }
+      }
+    } else {
+      // If search is cleared, restore the current view
+      if (currentPlaylistId === 'search') {
+        // Go back to playlists if we were in search results
+        showSection('playlists');
+      } else if (currentPlaylistId) {
+        // If in a playlist, show all tracks from that playlist
+        const currentPlaylist = getAllPlaylists().find(p => p.id === currentPlaylistId);
+        if (currentPlaylist) {
+          renderTracks(currentPlaylist);
+        }
       }
     }
+  });
+  
+  // Keep the button for accessibility, but it's no longer required for search
+  searchButton.addEventListener('click', () => {
+    // Trigger the input event to perform the search
+    searchInput.dispatchEvent(new Event('input'));
   });
   
   // Create playlist button
