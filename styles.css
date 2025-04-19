@@ -537,7 +537,7 @@ body.dark-theme .track-details p {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--gray-600);
+  color: var(--background-dark);
   transition: color 0.3s ease;
 }
 
@@ -588,7 +588,7 @@ body.dark-theme .time {
   position: relative;
   height: 6px;
   flex-grow: 1;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--gray-200);
   border-radius: 9999px;
   cursor: pointer;
 }
@@ -649,7 +649,7 @@ input[type=range] {
   -webkit-appearance: none;
   height: 5px;
   border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--gray-200);
   overflow: hidden;
   width: 6rem;
 }
@@ -701,7 +701,7 @@ input[type=range]::-webkit-slider-thumb {
 .search-container {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 9999px;
   padding: 0.25rem 0.5rem;
   max-width: 12rem;
@@ -822,7 +822,7 @@ body.dark-theme .small-button {
 #playbackSpeed {
   appearance: none;
   background-color: transparent;
-  color: var(--gray-600);
+  color: var(--background-dark);
   border: none;
   font-size: 0.875rem;
   cursor: pointer;
@@ -863,6 +863,11 @@ body.dark-theme #playbackSpeed {
   border-radius: 0.75rem;
   overflow: hidden;
   margin: 1rem;
+  color: var(--gray-200);
+}
+
+.close-button i {
+  color: var(--gray-200);
 }
 
 .modal-header {
