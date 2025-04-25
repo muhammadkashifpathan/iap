@@ -384,37 +384,6 @@ function setupEventListeners() {
     createPlaylistModal.classList.add('active');
   });
   
-  // Close modal button
-  closeModalButton.addEventListener('click', () => {
-    createPlaylistModal.classList.remove('active');
-  });
-  
-  // Save playlist button
-  savePlaylistButton.addEventListener('click', () => {
-    const title = playlistTitleInput.value.trim();
-    const description = playlistDescriptionInput.value.trim();
-    const coverImage = playlistCoverInput.value.trim();
-    
-    if (title) {
-      const newPlaylist = createPlaylist(title, description, coverImage);
-      createPlaylistModal.classList.remove('active');
-      
-      // Clear form
-      playlistTitleInput.value = '';
-      playlistDescriptionInput.value = '';
-      playlistCoverInput.value = '';
-      
-      // Re-render playlists to include the new one
-      renderPlaylists();
-      
-      // Switch to the new playlist
-      currentPlaylistId = newPlaylist.id;
-      playlistTitle.textContent = newPlaylist.title;
-      renderTracks(newPlaylist);
-      showSection('tracks');
-    }
-  });
-  
   // Handle clicks outside the modal to close it
   window.addEventListener('click', (e) => {
     if (e.target === createPlaylistModal) {
